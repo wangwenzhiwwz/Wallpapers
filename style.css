@@ -1,0 +1,311 @@
+/* =========================================
+   全局初始化与 Apple 核心美学
+   ========================================= */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 140px; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background-color: #f5f5f7; 
+    color: #1d1d1f;
+    min-height: 100vh;
+}
+
+/* =========================================
+   复合毛玻璃顶栏 (Header & Nav)
+   ========================================= */
+.glass-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 20px 0.5rem 20px;
+    text-align: center;
+}
+
+.glass-header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.year-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0.6rem 20px 0.8rem 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.year-tab {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 0, 0, 0.04);
+    color: #515154;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 20px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.year-tab:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #000;
+}
+
+/* =========================================
+   时间线区块布局 (Timeline Sections)
+   ========================================= */
+.year-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 20px 30px 20px;
+}
+
+.year-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin: 20px 0 10px 5px;
+    color: #1d1d1f;
+    display: flex;
+    align-items: center;
+}
+
+.year-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    margin-left: 20px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.wallpaper-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 9 / 16; 
+    background-color: #e8e8ed;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.wallpaper-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.wallpaper-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-download-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.wallpaper-card:hover .card-download-overlay {
+    opacity: 1;
+}
+
+/* =========================================
+   沉浸式全屏预览弹窗与交互按钮
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black; 
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.fullscreen-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* 悬浮毛玻璃左右切换按钮 */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.4rem;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 220;
+    user-select: none;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    scale: 1.05;
+}
+
+.prev-btn { left: 32px; }
+.next-btn { right: 32px; }
+
+/* 全屏模式下的唯一元素：悬浮下载按钮 */
+.modal-download-btn {
+    position: absolute;
+    bottom: 40px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.25); 
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 50px; 
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 210;
+}
+
+.modal-download-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* =========================================
+   移动端极致纯净体验响应式微调
+   ========================================= */
+@media (max-width: 768px) {
+    .nav-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        opacity: 0.5; /* 降低移动端视觉存在感，优先手势 */
+    }
+    .prev-btn { left: 16px; }
+    .next-btn { right: 16px; }
+    
+    .modal-download-btn {
+        bottom: 30px;
+        padding: 14px 28px;
+        font-size: 0.95rem;
+    }
+}
+
+
+/* =========================================
+   系统级深色模式 (Dark Mode) 支持
+   跟随系统主题自动切换
+   ========================================= */
+@media (prefers-color-scheme: dark) {
+    /* 1. 基础背景反转：采用 Apple 经典的深空黑与钛灰色 */
+    body {
+        background-color: #000000;
+        color: #f5f5f7;
+    }
+
+    /* 2. 顶栏毛玻璃适配暗色系 */
+    .glass-header {
+        background: rgba(28, 28, 30, 0.6); /* 替换为 iOS 风格的深色毛玻璃底色 */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* 3. 导航 Tab 适配：降低亮色背景，使用柔和的浅灰字体 */
+    .year-tab {
+        background: rgba(255, 255, 255, 0.1);
+        color: #a1a1a6;
+    }
+
+    .year-tab:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+    }
+
+    /* 4. 年份标题适配 */
+    .year-title {
+        color: #f5f5f7;
+    }
+
+    .year-title::after {
+        background: rgba(255, 255, 255, 0.1); /* 标题右侧的分割线变更为半透明白色 */
+    }
+
+    /* 5. 卡片底色与阴影加深 */
+    .wallpaper-card {
+        background-color: #1c1c1e;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .wallpaper-card:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    /* 注：全屏弹窗 (.modal) 及其内部按钮本就设计为全局暗色系叠加毛玻璃，
+       因此在深色模式下无需修改，本身就是完美的 Dark Mode 体验。 */
+}
