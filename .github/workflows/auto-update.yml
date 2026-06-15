@@ -1,0 +1,36 @@
+name: Auto Update Wallpaper List
+
+# 触发条件：当你 push 代码到 main 分支，且 images 文件夹有改动时触发
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'images/**'
+
+jobs:
+  update-list:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取你的仓库代码
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 配置 Python 环境
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # 3. 运行我们刚才写的 Python 脚本
+      - name: Run Update Script
+        run: python update_list.py
+
+      # 4. 自动提交并推送修改后的 script.js
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update wallpaper list via GitHub Actions"
+          file_pattern: "script.js"
