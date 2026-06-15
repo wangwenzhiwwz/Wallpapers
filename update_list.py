@@ -16,7 +16,11 @@ for filename in os.listdir(image_dir):
         # 拼接成相对路径
         image_files.append(f"images/{filename}")
 
-# 将列表转换为格式化的 JSON 字符串（也就是 JS 数组格式）
+# 核心优化：按文件名（时间戳）倒序排列
+# 确保最新的图片永远在最前面，且每次 GitHub Actions 提交时的 Git Diff 保持干净整洁
+image_files.sort(reverse=True)
+
+# 将列表转换为格式化的 JSON 字符串（即 JS 数组格式）
 js_array_str = json.dumps(image_files, indent=4)
 replacement = f"const wallpapers = {js_array_str};"
 
