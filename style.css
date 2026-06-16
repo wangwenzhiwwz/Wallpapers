@@ -3,7 +3,7 @@
    ========================================= */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 140px; 
+    scroll-padding-top: 118px;
 }
 
 * {
@@ -15,7 +15,8 @@ html {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-    background-color: #f5f5f7; 
+    background:
+        linear-gradient(180deg, #ffffff 0%, #f5f5f7 42%, #eceef3 100%);
     color: #1d1d1f;
     min-height: 100vh;
 }
@@ -28,68 +29,83 @@ body {
     top: 0;
     z-index: 100;
     width: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 28px rgba(20, 23, 28, 0.06);
 }
 
 .header-content {
-    max-width: 1400px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 1rem 20px 0.5rem 20px;
+    padding: 0.8rem 18px 0.35rem 18px;
     text-align: center;
 }
 
 .glass-header h1 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: -0.3px;
+    font-size: 1.36rem;
+    font-weight: 750;
+    letter-spacing: 0;
+    line-height: 1.15;
 }
 
 .year-nav {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    padding: 0.6rem 20px 0.8rem 20px;
-    max-width: 1400px;
+    gap: 8px;
+    padding: 0.42rem 18px 0.68rem 18px;
+    max-width: 1180px;
     margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.year-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .year-tab {
     display: inline-block;
-    padding: 6px 16px;
-    background: rgba(0, 0, 0, 0.04);
-    color: #515154;
+    flex: 0 0 auto;
+    padding: 6px 13px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #454549;
     text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 650;
     border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .year-tab:hover {
-    background: rgba(0, 0, 0, 0.08);
-    color: #000;
+    background: #1d1d1f;
+    border-color: #1d1d1f;
+    color: #fff;
 }
 
 /* =========================================
    时间线区块布局 (Timeline Sections)
    ========================================= */
 .year-section {
-    max-width: 1400px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 10px 20px 30px 20px;
+    padding: 16px 18px 32px 18px;
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
 }
 
 .year-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin: 20px 0 10px 5px;
+    font-size: 1.5rem;
+    font-weight: 760;
+    letter-spacing: 0;
+    margin: 16px 0 14px 0;
     color: #1d1d1f;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .year-title::after {
@@ -97,30 +113,46 @@ body {
     flex: 1;
     height: 1px;
     background: rgba(0, 0, 0, 0.06);
-    margin-left: 20px;
+    margin-left: 10px;
+}
+
+.year-count {
+    flex: 0 0 auto;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.045);
+    color: #6e6e73;
+    font-size: 0.75rem;
+    font-weight: 650;
+    line-height: 1;
 }
 
 .gallery-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 10px 0;
+    grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+    gap: 14px;
+    padding: 8px 0;
 }
 
 .wallpaper-card {
     position: relative;
-    border-radius: 20px;
+    border-radius: 14px;
     overflow: hidden;
     aspect-ratio: 9 / 16; 
     background-color: #e8e8ed;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.04),
+        0 10px 28px rgba(25, 28, 33, 0.08);
     cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    isolation: isolate;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
 }
 
 .wallpaper-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.06),
+        0 16px 36px rgba(25, 28, 33, 0.16);
 }
 
 .wallpaper-card img {
@@ -128,6 +160,12 @@ body {
     height: 100%;
     object-fit: cover;
     display: block;
+    background: linear-gradient(135deg, #eceef3, #dfe3ea);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wallpaper-card:hover img {
+    transform: scale(1.035);
 }
 
 .card-download-overlay {
@@ -135,8 +173,8 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 12px;
-    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    padding: 36px 10px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.58), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
     text-align: center;
@@ -213,26 +251,30 @@ body {
     left: 50%;
     transform: translateX(-50%); 
     padding: 16px 32px;
-    background: rgba(255, 255, 255, 0.25); 
+    background: rgba(16, 16, 18, 0.72);
     backdrop-filter: blur(25px) saturate(180%);
     -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.34);
     color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
     border-radius: 50px; 
     text-align: center;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
     transition: all 0.3s ease;
     z-index: 210;
 }
 
 .modal-download-btn:hover {
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.82);
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
     transform: translateX(-50%) translateY(-2px);
 }
 
@@ -240,6 +282,72 @@ body {
    移动端极致纯净体验响应式微调
    ========================================= */
 @media (max-width: 768px) {
+    html {
+        scroll-padding-top: 104px;
+    }
+
+    .header-content {
+        padding: 0.72rem 12px 0.28rem 12px;
+    }
+
+    .glass-header h1 {
+        font-size: 1.18rem;
+    }
+
+    .year-nav {
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 0.42rem 12px 0.62rem 12px;
+    }
+
+    .year-tab {
+        padding: 6px 12px;
+        font-size: 0.78rem;
+    }
+
+    .year-section {
+        padding: 12px 10px 26px 10px;
+        contain-intrinsic-size: 760px;
+    }
+
+    .year-title {
+        font-size: 1.15rem;
+        margin: 10px 0 10px 0;
+        gap: 8px;
+    }
+
+    .year-title::after {
+        margin-left: 6px;
+    }
+
+    .year-count {
+        padding: 3px 7px;
+        font-size: 0.68rem;
+    }
+
+    .gallery-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        padding: 4px 0;
+    }
+
+    .wallpaper-card {
+        border-radius: 12px;
+        box-shadow: 0 1px 8px rgba(20, 23, 28, 0.12);
+    }
+
+    .wallpaper-card:hover {
+        transform: none;
+    }
+
+    .wallpaper-card:hover img {
+        transform: none;
+    }
+
+    .card-download-overlay {
+        display: none;
+    }
+
     .nav-btn {
         width: 42px;
         height: 42px;
@@ -258,6 +366,25 @@ body {
     }
 }
 
+@media (max-width: 360px) {
+    html {
+        scroll-padding-top: 86px;
+    }
+
+    .year-section {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .gallery-container {
+        gap: 6px;
+    }
+
+    .wallpaper-card {
+        border-radius: 10px;
+    }
+}
+
 
 /* =========================================
    系统级深色模式 (Dark Mode) 支持
@@ -266,25 +393,56 @@ body {
 @media (prefers-color-scheme: dark) {
     /* 1. 基础背景反转：采用 Apple 经典的深空黑与钛灰色 */
     body {
-        background-color: #000000;
+        background:
+            linear-gradient(180deg, #111113 0%, #050506 48%, #000000 100%);
         color: #f5f5f7;
     }
 
     /* 2. 顶栏毛玻璃适配暗色系 */
     .glass-header {
-        background: rgba(28, 28, 30, 0.6); /* 替换为 iOS 风格的深色毛玻璃底色 */
+        background: rgba(20, 20, 22, 0.78); /* 替换为 iOS 风格的深色毛玻璃底色 */
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
     }
 
     /* 3. 导航 Tab 适配：降低亮色背景，使用柔和的浅灰字体 */
     .year-tab {
-        background: rgba(255, 255, 255, 0.1);
-        color: #a1a1a6;
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.08);
+        color: #c7c7cc;
     }
 
     .year-tab:hover {
-        background: rgba(255, 255, 255, 0.2);
-        color: #ffffff;
+        background: #f5f5f7;
+        border-color: #f5f5f7;
+        color: #111113;
+    }
+
+    .wallpaper-card {
+        box-shadow:
+            0 1px 1px rgba(255, 255, 255, 0.04),
+            0 12px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .wallpaper-card:hover {
+        box-shadow:
+            0 1px 2px rgba(255, 255, 255, 0.05),
+            0 18px 38px rgba(0, 0, 0, 0.68);
+    }
+
+    @media (max-width: 768px) {
+        .wallpaper-card {
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.42);
+        }
+    }
+
+    /* 5. 卡片底色与阴影加深 */
+    .wallpaper-card {
+        background-color: #1c1c1e;
+    }
+
+    .wallpaper-card img {
+        background: linear-gradient(135deg, #2c2c2e, #1c1c1e);
     }
 
     /* 4. 年份标题适配 */
@@ -296,14 +454,9 @@ body {
         background: rgba(255, 255, 255, 0.1); /* 标题右侧的分割线变更为半透明白色 */
     }
 
-    /* 5. 卡片底色与阴影加深 */
-    .wallpaper-card {
-        background-color: #1c1c1e;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    .wallpaper-card:hover {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    .year-count {
+        background: rgba(255, 255, 255, 0.1);
+        color: #a1a1a6;
     }
 
     /* 注：全屏弹窗 (.modal) 及其内部按钮本就设计为全局暗色系叠加毛玻璃，
